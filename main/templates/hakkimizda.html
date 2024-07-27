@@ -1,0 +1,88 @@
+{% extends "layout.html" %}
+
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="card">
+        <h2>Hakkımızda</h2>
+        <p>muğlaotelturizm.com, 4 yıldır Sapanca başta olmak üzere Türkiye'nin birçok ilinde bungalov ve villa kiralama konusunda hizmet veren önde gelen bir acentedir. Misafirlerimize doğayla iç içe, huzurlu ve lüks konaklama deneyimleri sunmayı amaçlayan muğlaotelturizm.com, her zevke ve ihtiyaca uygun seçenekleriyle tatil planlarınızı kolaylaştırır.</p>
+    </div>
+    <div class="card">
+        <h2>Neden muğlaotelturizm.com?</h2>
+        <p>Geniş Konaklama Seçenekleri: Sapanca’dan başlayarak Türkiye'nin dört bir yanında, özenle seçilmiş bungalov ve villalarımız ile doğanın tadını çıkarın. Her biri eşsiz özelliklere sahip konaklama seçeneklerimiz ile rüya gibi bir tatil sizi bekliyor.</p>
+    </div>
+    <div class="card animate-on-scroll">
+        <p>Konfor ve Lüks: Tüm bungalov ve villalarımız, modern ve konforlu bir tatil deneyimi sunmak için gerekli tüm olanaklarla donatılmıştır. Isıtmalı havuzlar, jakuziler, geniş bahçeler ve muhteşem manzaralar ile tatilinizi unutulmaz kılın.</p>
+    </div>
+    <div class="card animate-on-scroll">
+        <p>Müşteri Odaklı Hizmet: Müşteri memnuniyetini ön planda tutarak, tatil öncesi ve sonrası ihtiyaçlarınızda size destek olan deneyimli danışmanlarımız ile her zaman yanınızdayız. Tatiliniz boyunca her türlü sorunuz ve talebiniz için çağrı merkezimiz hizmetinizdedir.</p>
+    </div>
+    <div class="card animate-on-scroll">
+        <p>Kolay ve Güvenli Rezervasyon: muğlaotelturizm.com, kullanıcı dostu web sitesi ve güvenli ödeme seçenekleri ile tatil planlarınızı hızlı ve kolay bir şekilde yapmanızı sağlar. En uygun fiyatlarla, en iyi konaklama seçeneklerine ulaşmanın rahatlığını yaşayın.</p>
+    </div>
+    <div class="card animate-on-scroll">
+        <h2>Hakkımızda</h2>
+        <p>Kurulduğumuz günden bu yana, yenilikçi yaklaşımımızla turizm sektöründe öncü bir rol üstlenen muğlaotelturizm.com,  yerli ve yabancı misafirlerimize en iyi hizmeti sunmayı hedefler. Misyonumuz, doğa ile iç içe, rahat ve huzurlu bir tatil deneyimini herkes için erişilebilir kılmaktır.</p>
+    </div>
+    <div class="card animate-on-scroll">
+        <p>muğlaotelturizm.com ve sunduğumuz hizmetler hakkında daha ayrıntılı bilgiye <a href="http://www.muğlaotelturizm.com.com.tr">www.muğlaotelturizm.com.com.tr</a> adresinden ya da 0216 706 54 01 numaralı telefondan ulaşabilirsiniz. Doğanın kalbinde unutulmaz bir tatil için muğlaotelturizm.com’yi tercih edin.</p>
+    </div>
+</div>
+
+
+<style>
+    .container {
+        margin-top: 100px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 10px;
+    flex: 1 1 calc(100% - 40px); /* Full width on mobile, adjust as needed */
+    max-width: 400px; /* Max width of each card */
+}
+
+.card h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #333333;
+}
+
+.card p {
+    font-size: 1em;
+    line-height: 1.6;
+    color: #666666;
+}
+
+.card a {
+    color: #1e90ff;
+    text-decoration: none;
+}
+
+.card a:hover {
+    text-decoration: underline;
+}
+
+@media (min-width: 600px) {
+    .card {
+        flex: 1 1 calc(50% - 40px); /* 2 cards per row on larger screens */
+    }
+}
+
+@media (min-width: 900px) {
+    .card {
+        flex: 1 1 calc(33.33% - 40px); /* 3 cards per row on larger screens */
+    }
+}
+</style>
+{% endblock %}
