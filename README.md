@@ -24,10 +24,11 @@ Projeyi yerel ortamınızda çalıştırmak için aşağıdaki adımları izleyi
    ```bash
    git clone https://github.com/Hamza-Sengul/Muglaturizmuptaded.git
    cd Muglaturizmuptaded
-Sanal ortam oluşturun ve etkinleştirin: <br>
-  python -m venv env<br>
+**Sanal ortam oluşturun ve etkinleştirin:**
+   ```bash
+  python -m venv env  
   source env/bin/activate  # Windows için: .\env\Scripts\activate<br>
-Gereksinimleri yükleyin:<br>
+**Gereksinimleri yükleyin:**
   pip install -r requirements.txt<br>
 Veritabanını migrate edin:<br>
   python manage.py migrate<br>
