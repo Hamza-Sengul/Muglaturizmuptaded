@@ -24,15 +24,19 @@ Projeyi yerel ortamınızda çalıştırmak için aşağıdaki adımları izleyi
    ```bash
    git clone https://github.com/Hamza-Sengul/Muglaturizmuptaded.git
    cd Muglaturizmuptaded
-**Sanal ortam oluşturun ve etkinleştirin:**
-  python -m venv env  
-  source env/bin/activate  # Windows için: .\env\Scripts\activate  
-**Gereksinimleri yükleyin:**
-  pip install -r requirements.txt<br>
-**Veritabanını migrate edin:**
-  python manage.py migrate<br>
-**Sunucuyu başlatın**
-  python manage.py runserver<br><br>
+2. **Sanal ortam oluşturun ve etkinleştirin:**
+   ```bash
+     python -m venv env  
+     source env/bin/activate  # Windows için: .\env\Scripts\activate  
+4. **Gereksinimleri yükleyin:**
+   ```bash
+   pip install -r requirements.txt<br>
+5. **Veritabanını migrate edin:**
+   ```bash
+   python manage.py migrate<br>
+6. **Sunucuyu başlatın**
+   ```bash
+   python manage.py runserver<br><br>
 
 Daha detaylı kurulum ve konfigürasyon bilgileri için Django belgelendirmesine göz atabilirsiniz. 📚
 
