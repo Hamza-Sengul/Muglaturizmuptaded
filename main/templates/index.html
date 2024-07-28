@@ -152,86 +152,86 @@
 
 </div>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Tüm villa kartlarını seç
-        const villaCards = document.querySelectorAll('.uruncard2');
-    
-        villaCards.forEach(card => {
-            // Her villa kartındaki resimleri seç
-            const images = card.querySelectorAll('.villa-image');
-            const indicatorsContainer = card.querySelector('.indicator-container');
-            let currentIndex = 0;
-    
-            // Noktaları oluştur
-            images.forEach((_, index) => {
-                const indicator = document.createElement('div');
-                indicator.classList.add('indicator');
-                if (index === 0) {
-                    indicator.classList.add('active');
-                }
-                indicatorsContainer.appendChild(indicator);
-            });
-    
-            const indicators = indicatorsContainer.querySelectorAll('.indicator');
-    
-            // İlk resmi göster
-            images[0].classList.add('active');
-    
-            // Eğer birden fazla resim varsa animasyonu başlat
-            if (images.length > 1) {
-                setInterval(() => {
-                    // Aktif resmi gizle
-                    images[currentIndex].classList.remove('active');
-                    images[currentIndex].classList.add('inactive-left');
-                    indicators[currentIndex].classList.remove('active');
-    
-                    // Sıradaki resim indeksini belirle
-                    currentIndex = (currentIndex + 1) % images.length;
-    
-                    // Yeni resmi göster
-                    images[currentIndex].classList.remove('inactive-right');
-                    images[currentIndex].classList.add('active');
-                    indicators[currentIndex].classList.add('active');
-                }, Math.random() * (6000 - 3000) + 3000);
+document.addEventListener('DOMContentLoaded', function() {
+    // Tüm villa kartlarını seç
+    const villaCards = document.querySelectorAll('.uruncard2');
+
+    villaCards.forEach(card => {
+        // Her villa kartındaki resimleri seç
+        const images = card.querySelectorAll('.villa-image');
+        const indicatorsContainer = card.querySelector('.indicator-container');
+        let currentIndex = 0;
+
+        // Noktaları oluştur
+        images.forEach((_, index) => {
+            const indicator = document.createElement('div');
+            indicator.classList.add('indicator');
+            if (index === 0) {
+                indicator.classList.add('active');
             }
-    
-            // Mobil kullanıcılar için parmak hareketi ile geçiş
-            let touchstartX = 0;
-            let touchendX = 0;
-    
-            card.addEventListener('touchstart', function(event) {
-                touchstartX = event.changedTouches[0].screenX;
-            });
-    
-            card.addEventListener('touchend', function(event) {
-                touchendX = event.changedTouches[0].screenX;
-                handleGesture();
-            });
-    
-            function handleGesture() {
-                if (touchendX < touchstartX) {
-                    // Sol kaydırma - Bir sonraki resme geç
-                    images[currentIndex].classList.remove('active');
-                    images[currentIndex].classList.add('inactive-left');
-                    indicators[currentIndex].classList.remove('active');
-                    currentIndex = (currentIndex + 1) % images.length;
-                    images[currentIndex].classList.remove('inactive-right');
-                    images[currentIndex].classList.add('active');
-                    indicators[currentIndex].classList.add('active');
-                }
-                if (touchendX > touchstartX) {
-                    // Sağ kaydırma - Bir önceki resme geç
-                    images[currentIndex].classList.remove('active');
-                    images[currentIndex].classList.add('inactive-right');
-                    indicators[currentIndex].classList.remove('active');
-                    currentIndex = (currentIndex - 1 + images.length) % images.length;
-                    images[currentIndex].classList.remove('inactive-left');
-                    images[currentIndex].classList.add('active');
-                    indicators[currentIndex].classList.add('active');
-                }
-            }
+            indicatorsContainer.appendChild(indicator);
         });
+
+        const indicators = indicatorsContainer.querySelectorAll('.indicator');
+
+        // İlk resmi göster
+        images[0].classList.add('active');
+
+        // Eğer birden fazla resim varsa animasyonu başlat
+        if (images.length > 1) {
+            setInterval(() => {
+                // Mevcut resmi gizle
+                images[currentIndex].classList.remove('active');
+                images[currentIndex].classList.add('inactive-left');
+                indicators[currentIndex].classList.remove('active');
+
+                // Sıradaki resim indeksini belirle
+                currentIndex = (currentIndex + 1) % images.length;
+
+                // Yeni resmi göster
+                images[currentIndex].classList.remove('inactive-left', 'inactive-right');
+                images[currentIndex].classList.add('active');
+                indicators[currentIndex].classList.add('active');
+            }, Math.random() * (6000 - 3000) + 3000);
+        }
+
+        // Mobil kullanıcılar için parmak hareketi ile geçiş
+        let touchstartX = 0;
+        let touchendX = 0;
+
+        card.addEventListener('touchstart', function(event) {
+            touchstartX = event.changedTouches[0].screenX;
+        });
+
+        card.addEventListener('touchend', function(event) {
+            touchendX = event.changedTouches[0].screenX;
+            handleGesture();
+        });
+
+        function handleGesture() {
+            if (touchendX < touchstartX) {
+                // Sol kaydırma - Bir sonraki resme geç
+                images[currentIndex].classList.remove('active');
+                images[currentIndex].classList.add('inactive-left');
+                indicators[currentIndex].classList.remove('active');
+                currentIndex = (currentIndex + 1) % images.length;
+                images[currentIndex].classList.remove('inactive-left', 'inactive-right');
+                images[currentIndex].classList.add('active');
+                indicators[currentIndex].classList.add('active');
+            }
+            if (touchendX > touchstartX) {
+                // Sağ kaydırma - Bir önceki resme geç
+                images[currentIndex].classList.remove('active');
+                images[currentIndex].classList.add('inactive-right');
+                indicators[currentIndex].classList.remove('active');
+                currentIndex = (currentIndex - 1 + images.length) % images.length;
+                images[currentIndex].classList.remove('inactive-left', 'inactive-right');
+                images[currentIndex].classList.add('active');
+                indicators[currentIndex].classList.add('active');
+            }
+        }
     });
+});
     </script>
     
     
