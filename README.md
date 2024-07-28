@@ -30,13 +30,13 @@ Projeyi yerel ortamınızda çalıştırmak için aşağıdaki adımları izleyi
      source env/bin/activate  # Windows için: .\env\Scripts\activate  
 4. **Gereksinimleri yükleyin:**
    ```bash
-   pip install -r requirements.txt<br>
+   pip install -r requirements.txt
 5. **Veritabanını migrate edin:**
    ```bash
-   python manage.py migrate<br>
+   python manage.py migrate
 6. **Sunucuyu başlatın**
    ```bash
-   python manage.py runserver<br><br>
+   python manage.py runserver
 
 Daha detaylı kurulum ve konfigürasyon bilgileri için Django belgelendirmesine göz atabilirsiniz. 📚
 
