@@ -1,4 +1,5 @@
 from django.db import models
+from ckeditor.fields import RichTextField
 
 class Bungalov(models.Model):
     name = models.CharField(max_length=200, verbose_name='Bungalov Adı')
@@ -18,7 +19,7 @@ class BungalovImage(models.Model):
 
 class Villa(models.Model):
     name = models.CharField(max_length=200, verbose_name='Villa Adı')
-    description = models.TextField(verbose_name='Açıklama')
+    description = RichTextField()
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Fiyat')
     
     def __str__(self):
@@ -30,3 +31,11 @@ class VillaImage(models.Model):
     
     def __str__(self):
         return self.villa.name
+
+class Kurallar(models.Model):
+    title = models.CharField(max_length=255)
+    content = models.TextField()
+
+    def __str__(self):
+        return self.title
+
