@@ -25,3 +25,7 @@ class VillaAdmin(admin.ModelAdmin):
 class VillaImageAdmin(admin.ModelAdmin):
     list_display = ('villa', 'image')
     search_fields = ('villa__name',)
+@admin.register(Kurallar)
+class KurallarAdmin(admin.ModelAdmin):
+    list_display = ('title',)
+    search_fields = ('title',)
