@@ -47,6 +47,26 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        // Set default dates
+        const today = new Date();
+        const tomorrow = new Date();
+        tomorrow.setDate(today.getDate() + 1);
+
+        const formatDate = (date) => {
+            const d = new Date(date);
+            let month = '' + (d.getMonth() + 1);
+            let day = '' + d.getDate();
+            const year = d.getFullYear();
+
+            if (month.length < 2) month = '0' + month;
+            if (day.length < 2) day = '0' + day;
+
+            return [year, month, day].join('-');
+        };
+
+        document.getElementById('start-date').value = formatDate(today);
+        document.getElementById('end-date').value = formatDate(tomorrow);
+
         // Event listener for increasing guest count
         document.getElementById('increase-guests').addEventListener('click', function() {
             let guestCount = document.getElementById('guest-count');
@@ -80,7 +100,12 @@
 
         // Redirect to WhatsApp
         window.redirectToWhatsApp5 = function() {
-            window.location.href = 'https://wa.me/';
+            let startDate = document.getElementById('start-date').value;
+            let endDate = document.getElementById('end-date').value;
+            let guestCount = document.getElementById('guest-count').textContent;
+
+            let message = `Giriş Tarihi: ${startDate}%0AÇıkış Tarihi: ${endDate}%0AMisafir Sayısı: ${guestCount} yetişkin%0Arandevu oluşturmak istiyorum.`;
+            window.location.href = `https://wa.me/905441804935?text=${message}`;
         };
     });
 </script>
