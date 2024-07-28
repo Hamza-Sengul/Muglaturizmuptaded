@@ -23,7 +23,8 @@ def gizlilik(request):
     return render(request, 'gizlilik.html')
 
 def kurallar(request):
-    return render(request, 'kurallar.html')
+    kurallar = Kurallar.objects.all()
+    return render(request, 'kurallar.html', {'kurallar': kurallar})
 
 def villa(request):
     villas = Villa.objects.all()
