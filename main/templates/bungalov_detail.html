@@ -48,6 +48,8 @@
                     </div>
                 {% endfor %}
             </div>
+            <button class="prev" aria-label="Previous slide">&#10094;</button>
+            <button class="next" aria-label="Next slide">&#10095;</button>
         </div>
     </div>
     <div class="container">
@@ -269,6 +271,29 @@ document.addEventListener('DOMContentLoaded', function() {
         slides.style.transform = `translateX(-${index * 100}%)`;
     };
 
+    const moveToPreviousSlide = () => {
+        index = (index - 1 + slideCount) % slideCount;
+        slides.style.transform = `translateX(-${index * 100}%)`;
+    };
+
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    const handleTouchStart = (e) => {
+        touchStartX = e.touches[0].clientX;
+    };
+
+    const handleTouchEnd = (e) => {
+        touchEndX = e.touches[0].clientX;
+        if (touchStartX > touchEndX + 50) {
+            // Swipe left
+            moveToNextSlide();
+        } else if (touchStartX < touchEndX - 50) {
+            // Swipe right
+            moveToPreviousSlide();
+        }
+    };
+
     window.addEventListener('scroll', () => {
         handleScrollAnimation();
     });
@@ -277,8 +302,14 @@ document.addEventListener('DOMContentLoaded', function() {
     handleScrollAnimation();
 
     // Slider functionality
-    setInterval(moveToNextSlide, 3000); // Her 3 saniyede bir kaydır
+    slides.addEventListener('touchstart', handleTouchStart);
+    slides.addEventListener('touchend', handleTouchEnd);
+
+    // Button functionality
+    document.querySelector('.prev').addEventListener('click', moveToPreviousSlide);
+    document.querySelector('.next').addEventListener('click', moveToNextSlide);
 });
+
 
 
 
@@ -288,6 +319,32 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <style>
+     .prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 100;
+}
+
+/* Positioning */
+.prev {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
+}
+
+/* Make slider swipeable on mobile devices */
+.slider {
+    touch-action: pan-y; /* Allows horizontal swipe */
+}
      .features-list {
             list-style-type: none;
             padding: 0;
