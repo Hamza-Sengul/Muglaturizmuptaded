@@ -202,24 +202,6 @@ document.addEventListener('DOMContentLoaded', function() {
         // İlk resmi göster
         images[0].classList.add('active');
 
-        // Eğer birden fazla resim varsa animasyonu başlat
-        if (images.length > 1) {
-            setInterval(() => {
-                // Mevcut resmi gizle
-                images[currentIndex].classList.remove('active');
-                images[currentIndex].classList.add('inactive-left');
-                indicators[currentIndex].classList.remove('active');
-
-                // Sıradaki resim indeksini belirle
-                currentIndex = (currentIndex + 1) % images.length;
-
-                // Yeni resmi göster
-                images[currentIndex].classList.remove('inactive-left', 'inactive-right');
-                images[currentIndex].classList.add('active');
-                indicators[currentIndex].classList.add('active');
-            }, Math.random() * (6000 - 3000) + 3000);
-        }
-
         // Mobil kullanıcılar için parmak hareketi ile geçiş
         let touchstartX = 0;
         let touchendX = 0;
@@ -257,6 +239,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
     </script>
     
     
