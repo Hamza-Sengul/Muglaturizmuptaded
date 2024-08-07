@@ -15,4 +15,5 @@ urlpatterns = [
     path('villa/', views.villa, name='villa'),
     path('villa/<int:id>/', views.villa_detail, name='villa_detail'),
     path('bungalov/', views.bungalov, name='bg'),
+    path('belgeler', views.belgeler, name='belgeler'),  
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
