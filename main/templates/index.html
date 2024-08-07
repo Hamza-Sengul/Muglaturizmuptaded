@@ -31,11 +31,11 @@
                 <button id="increase-guests">+</button>
             </div>
         </div>
-        <div class="bungalov-select" style="margin-bottom: 20px;">
+        <div class="bungalov-select">
             <span class="icon"><i class="fa-solid fa-house"></i></span>
-            <span class="text">Bungalov Seç</span>
-            <button id="bungalov-select-button" class="subtext" style="margin-left: 40px;">Bungalov Seç</button>
-            
+            <span class="text">Ev Seç</span>
+            <button id="bungalov-select-button" class="subtext" style="margin-left: 100px; margin-bottom: 30px;">Ev Seç</button>
+            <span id="selected-bungalov"></span>
         </div>
         <button class="search-button" onclick="showPopup5()">Otel Ara</button>
     </div>
@@ -54,7 +54,7 @@
 <div id="bungalov-popup" class="popup">
     <div class="popup-content">
         <span class="close-button" onclick="closeBungalovPopup()">&times;</span>
-        <h2>Bungalov Seç</h2>
+        <h2>Ev Seç</h2>
         <div id="bungalov-options"></div>
     </div>
 </div>
@@ -166,6 +166,7 @@
         };
     });
 </script>
+
   <div class="sec">
     <div class="button-container">
         <button class="action-button">
@@ -183,7 +184,7 @@
 
   <div class="urunler">
     {% for bungalov in bungalovs %}
-    <div class="uruncard2 animate-on-scroll">
+    <div class="uruncard2">
         <div class="uruncardresim2">
             {% for image in bungalov.images.all %}
             {% if forloop.first %}
