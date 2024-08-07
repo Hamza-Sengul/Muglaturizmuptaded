@@ -34,3 +34,5 @@ def villa_detail(request, id):
     villa = get_object_or_404(Villa, id=id)
     images = villa.images.all()
     return render(request, 'villa_detail.html', {'villa': villa, 'images': images})
+def belgeler(request):
+    return render(request, 'belgeler.html')
