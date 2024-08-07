@@ -31,6 +31,12 @@
                 <button id="increase-guests">+</button>
             </div>
         </div>
+        <div class="bungalov-select" style="margin-bottom: 20px;">
+            <span class="icon"><i class="fa-solid fa-house"></i></span>
+            <span class="text">Bungalov Seç</span>
+            <button id="bungalov-select-button" class="subtext" style="margin-left: 40px;">Bungalov Seç</button>
+            
+        </div>
         <button class="search-button" onclick="showPopup5()">Otel Ara</button>
     </div>
 </section>
@@ -42,6 +48,14 @@
         <p id="selected-info5"></p>
         <p>Bilgileriniz kaydedildi. Canlı desteğe bağlanın.</p>
         <button class="whatsapp-button5" onclick="redirectToWhatsApp5()">Canlı Destek</button>
+    </div>
+</div>
+
+<div id="bungalov-popup" class="popup">
+    <div class="popup-content">
+        <span class="close-button" onclick="closeBungalovPopup()">&times;</span>
+        <h2>Bungalov Seç</h2>
+        <div id="bungalov-options"></div>
     </div>
 </div>
 
@@ -86,8 +100,9 @@
             let startDate = document.getElementById('start-date').value;
             let endDate = document.getElementById('end-date').value;
             let guestCount = document.getElementById('guest-count').textContent;
+            let selectedBungalov = document.getElementById('selected-bungalov').textContent;
 
-            let selectedInfo = `Giriş Tarihi: ${startDate}<br>Çıkış Tarihi: ${endDate}<br>Misafir Sayısı: ${guestCount} yetişkin`;
+            let selectedInfo = `Giriş Tarihi: ${startDate}<br>Çıkış Tarihi: ${endDate}<br>Misafir Sayısı: ${guestCount} yetişkin<br>Bungalov: ${selectedBungalov}`;
 
             document.getElementById('selected-info5').innerHTML = selectedInfo;
             document.getElementById('popup5').style.display = 'flex';
@@ -103,9 +118,51 @@
             let startDate = document.getElementById('start-date').value;
             let endDate = document.getElementById('end-date').value;
             let guestCount = document.getElementById('guest-count').textContent;
+            let selectedBungalov = document.getElementById('selected-bungalov').textContent;
 
-            let message = `Giriş Tarihi: ${startDate}%0AÇıkış Tarihi: ${endDate}%0AMisafir Sayısı: ${guestCount} yetişkin%0Arandevu oluşturmak istiyorum.`;
+            let message = `Giriş Tarihi: ${startDate}%0AÇıkış Tarihi: ${endDate}%0AMisafir Sayısı: ${guestCount} yetişkin%0ABungalov: ${selectedBungalov}%0Arandevu oluşturmak istiyorum.`;
             window.location.href = `https://wa.me/905441804935?text=${message}`;
+        };
+
+        // Open bungalov select popup
+        document.getElementById('bungalov-select-button').addEventListener('click', function() {
+            document.getElementById('bungalov-popup').style.display = 'block';
+        });
+
+        // Close bungalov select popup
+        window.closeBungalovPopup = function() {
+            document.getElementById('bungalov-popup').style.display = 'none';
+        };
+
+        // Load bungalov options dynamically
+        const bungalovOptions = [
+            {% for bungalov in bungalovs %}
+            {
+                id: '{{ bungalov.id }}',
+                name: '{{ bungalov.name }}',
+                image: '{% if bungalov.images.first %}{{ bungalov.images.first.image.url }}{% endif %}',
+                price: '{{ bungalov.price }} TL'
+            },
+            {% endfor %}
+        ];
+
+        const bungalovOptionsContainer = document.getElementById('bungalov-options');
+        bungalovOptions.forEach(bungalov => {
+            const bungalovElement = document.createElement('div');
+            bungalovElement.classList.add('bungalov-option');
+            bungalovElement.innerHTML = `
+                <img src="${bungalov.image}" alt="${bungalov.name}">
+                <h3>${bungalov.name}</h3>
+                <p>${bungalov.price}</p>
+                <button onclick="selectBungalov('${bungalov.name}')">Seç</button>
+            `;
+            bungalovOptionsContainer.appendChild(bungalovElement);
+        });
+
+        // Select bungalov function
+        window.selectBungalov = function(bungalovName) {
+            document.getElementById('selected-bungalov').textContent = bungalovName;
+            closeBungalovPopup();
         };
     });
 </script>
@@ -125,34 +182,29 @@
 
 
   <div class="urunler">
-    {% for villa in villas %}
-    <div class="uruncard2 animate-on-scroll" data-villa-id="{{ villa.id }}">
+    {% for bungalov in bungalovs %}
+    <div class="uruncard2 animate-on-scroll">
         <div class="uruncardresim2">
-            {% for image in villa.images.all %}
-            <a href="{% url 'villa_detail' villa.id %}"><img src="{{ image.image.url }}" alt="" class="villa-image" data-villa-id="{{ villa.id }}"></a>
+            {% for image in bungalov.images.all %}
+            {% if forloop.first %}
+            <a href="{% url 'bungalov_detail' bungalov.id %}"><img src="{{ image.image.url }}" alt=""></a>
+            {% endif %}
             {% endfor %}
         </div>
-        <div class="indicator-container"></div>
         <div class="uruncardad">
-            <a href="{% url 'villa_detail' villa.id %}"><h3>{{ villa.name }}</h3></a>
+            <a href="{% url 'bungalov_detail' bungalov.id %}"><h3>{{ bungalov.name }}</h3></a>
         </div>
         <div class="uruncardbg">
-            <a href="#">Villa</a>
+            <a href="#">Bungalov</a>
         </div>
         <div class="uruncardkonum">
-            <a href="#"><i class="fa-solid fa-location-dot"></i> Fethiye / Muğla</a>
+            <a href="#"><i class="fa-solid fa-location-dot"></i> Sakarya / Sapanca</a>
         </div>
         <div class="uruncardkalp2">
             <a href="#"><i class="fa-regular fa-heart"></i></a>
         </div>
-        <div class="uruncardon">
-            <a href="#">Öne Çıkanlar</a>
-        </div>
-        <div class="uruncard1gun">
-            <a href="#"><i class="fa-solid fa-bell"></i>1 Günler</a>
-        </div>
-        <div class="uruncardfiyat2">
-            <a href="#">{{ villa.price }} TL</a>
+        <div class="uruncardfiyat">
+            <p>{{ bungalov.price }} TL</p>
         </div>
         <div class="uruncardkesfet2">
             <button id="rezervasyonButonu{{ forloop.counter }}">Rezervasyon Yap</button>
@@ -169,9 +221,11 @@
                 </a>
             </div>
         </div>
+        
     </div>
     {% endfor %}
 </div>
+
 
 
 
@@ -201,6 +255,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // İlk resmi göster
         images[0].classList.add('active');
+
+        // Eğer birden fazla resim varsa animasyonu başlat
+        if (images.length > 1) {
+            setInterval(() => {
+                // Mevcut resmi gizle
+                images[currentIndex].classList.remove('active');
+                images[currentIndex].classList.add('inactive-left');
+                indicators[currentIndex].classList.remove('active');
+
+                // Sıradaki resim indeksini belirle
+                currentIndex = (currentIndex + 1) % images.length;
+
+                // Yeni resmi göster
+                images[currentIndex].classList.remove('inactive-left', 'inactive-right');
+                images[currentIndex].classList.add('active');
+                indicators[currentIndex].classList.add('active');
+            }, Math.random() * (6000 - 3000) + 3000);
+        }
 
         // Mobil kullanıcılar için parmak hareketi ile geçiş
         let touchstartX = 0;
@@ -239,7 +311,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
-
     </script>
     
     
@@ -660,6 +731,78 @@ window.onclick = function(event) {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.popup5, .popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    overflow: scroll;
+    margin-top: 100px;
+}
+
+.popup-content5, .popup-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 300px;
+}
+
+.close-button5, .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 34px;
+    cursor: pointer;
+}
+
+.bungalov-option {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+}
+
+.bungalov-option img {
+    max-width: 100%;
+    height: auto;
+}
+
+.bungalov-option h3 {
+    margin: 10px 0;
+}
+
+.bungalov-option button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.bungalov-option button:hover {
+    background-color: #45a049;
 }
 </style>
 
