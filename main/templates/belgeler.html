@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% load static %}
+
+{% block content %}
+<div class="cont">
+    <div class="resim">
+        <img src="{% static 'img/belge.jpg' %}" alt="" width="350px">
+    </div>
+    <div class="aciklama">
+        <h1>GÜVENLİ TURİZM SERTİFAKSI 
+        </h1>
+        <h3>TÜRSAP BELGE NO : 7831
+        </h3>
+        <p>Tüm işlemleriniz resmi faturalarla belgelendirilip sizlere PDF dosyası olarak aktarılmaktadır.</p>
+    </div>
+</div>
+<div class="cont" style="margin-top: -100px;">
+    <div class="resim">
+        <img src="{% static 'img/belge2.jpg' %}" alt="" width="350px">
+    </div>
+    <div class="aciklama">
+        <h1>Acente Adı: SİELENT TRAVEL 
+
+        </h1>
+        <h3>Belge No : 7831
+        </h3>
+        <p><a href="https://www.tursab.org.tr/acenta-arama">https://www.tursab.org.tr/acenta-arama</a></p>
+        <p>Tüm işlemleriniz resmi faturalarla belgelendirilip sizlere PDF dosyası olarak aktarılmaktadır.</p>
+    </div>
+</div>
+<style>
+    .cont {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-top: 130px;
+    }
+    .aciklama {
+        padding-left: 25px;
+        margin-top: 20px;
+    }
+    .aciklama h1 {
+        font-size: larger;
+        letter-spacing: 2px;
+    }
+</style>
+{% endblock %}
