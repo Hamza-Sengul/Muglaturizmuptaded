@@ -3,7 +3,132 @@
 {% load static %}
 
 {% block content %}
+<div class="balloon-container">
+    <div class="balloon" id="balloon1">
+      <div class="string"></div>
+      2023 yılı en çok tercih edilen acente
+    </div>
+    <div class="balloon" id="balloon2">
+      <div class="string"></div>
+      Bizi tercih ettiğiniz için teşekkürler
+    </div>
+    <div class="balloon" id="balloon3">
+      <div class="string"></div>
+      Türsap Gücencesi ile
+    </div>
+  </div>
+  
 
+  <style>
+.balloon-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2000;
+}
+
+.balloon {
+  position: absolute;
+  bottom: 0;
+  width: 110px;
+  height: 120px;
+  border-radius: 50%;
+  text-align: center;
+  padding: 15px;
+  color: white;
+  font-weight: 800;
+  animation: floatUp 10s linear forwards; /* Animasyonu yavaşlattık */
+  display: none;
+  font-size: 14px;
+}
+
+.string {
+  width: 2px;
+  height: 100px;
+  background: linear-gradient(to bottom, transparent, #000);
+  position: absolute;
+  bottom: -100px; /* Balonun altına ip ekler */
+  left: 50%;
+  transform: translateX(-50%);
+  animation: wave 2s infinite ease-in-out; /* Kıvrımlı bir ip animasyonu */
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  80% {
+    opacity: 1; /* 8 saniyeye kadar tamamen görünür */
+  }
+  100% {
+    transform: translateY(-800px);
+    opacity: 0; /* Son 2 saniyede yavaşça kaybolur */
+  }
+}
+
+@keyframes wave {
+  0%, 100% {
+    transform: translateX(-50%) rotate(0deg);
+  }
+  50% {
+    transform: translateX(-50%) rotate(5deg);
+  }
+}
+
+
+  </style>
+<script>
+ let balloonCount = 0;
+let maxBalloons = 6; // Her balon için 2 tekrar
+
+function getRandomColor() {
+  const letters = '0123456789ABCDEF';
+  let color = '#';
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
+function getRandomPosition() {
+  return Math.floor(Math.random() * 80) + '%'; // Sayfanın %0 - %90 arası bir yerden çıkmasını sağlar
+}
+
+function releaseBalloon(id) {
+  const balloon = document.getElementById(id);
+  balloon.style.backgroundColor = getRandomColor(); // Rastgele renk atama
+  balloon.style.left = getRandomPosition(); // Rastgele pozisyon atama
+  balloon.style.display = 'block';
+  setTimeout(() => {
+    balloon.style.display = 'none';
+  }, 10000); // Animasyon süresi kadar beklet
+}
+
+function startAnimation() {
+  if (balloonCount >= maxBalloons) return;
+
+  setTimeout(() => releaseBalloon('balloon1'), 0);
+  setTimeout(() => releaseBalloon('balloon2'), 2000);
+  setTimeout(() => releaseBalloon('balloon3'), 4000);
+
+  balloonCount += 3;
+
+  if (balloonCount < maxBalloons) {
+    setTimeout(startAnimation, 11000); // İlk animasyon bitince tekrar başlat
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  startAnimation();
+});
+
+
+
+</script>
 
 <section>
     <div class="card">
